@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Identity UI - gives us pre-built login/register pages if we need them -->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0" />
+    <!-- EF Core Design - needed to run dotnet ef migrations from this project -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Reference all our layers so the web project can use everything -->
+    <ProjectReference Include="..\JobTracker.DataLogic\JobTracker.DataLogic.csproj" />
+    <ProjectReference Include="..\JobTracker.Repository\JobTracker.Repository.csproj" />
+    <ProjectReference Include="..\JobTracker.BusinessLogic\JobTracker.BusinessLogic.csproj" />
+    <ProjectReference Include="..\JobTracker.ViewLogic\JobTracker.ViewLogic.csproj" />
+  </ItemGroup>
+
+</Project>

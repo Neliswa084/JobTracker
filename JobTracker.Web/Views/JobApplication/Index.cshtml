@@ -1,0 +1,104 @@
+@model IEnumerable<JobTracker.ViewLogic.ViewModels.JobApplicationViewModel>
+
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">My Job Applications</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        + Add New Application
+    </a>
+</div>
+
+@* Show a success message if one was set by a previous action (e.g. after creating/deleting) *@
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    @* Show a friendly empty state when the user has no applications yet *@
+    <div class="text-center py-5">
+        <h4 class="text-muted">No applications yet</h4>
+        <p class="text-muted">Start tracking your job search by adding your first application.</p>
+        <a asp-action="Create" class="btn btn-primary mt-2">Add Your First Application</a>
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Company</th>
+                    <th>Job Title</th>
+                    <th>Status</th>
+                    <th>Date Applied</th>
+                    <th>Days Ago</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var application in Model)
+                {
+                    <tr>
+                        <td class="fw-semibold">@application.CompanyName</td>
+                        <td>@application.JobTitle</td>
+                        <td>
+                            @* Color-code the status badge so it's easy to scan *@
+                            <span class="badge @GetStatusBadgeClass(application.Status)">
+                                @application.Status
+                            </span>
+                        </td>
+                        <td>@application.DateApplied.ToString("dd MMM yyyy")</td>
+                        <td>@application.DaysSinceApplied days</td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@application.Id"
+                               class="btn btn-sm btn-outline-secondary me-1">View</a>
+                            <a asp-action="Edit" asp-route-id="@application.Id"
+                               class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@application.Id"
+                               class="btn btn-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @* Summary counts at the bottom - helps the user see how their job search is going *@
+    <div class="row mt-3 text-center">
+        <div class="col">
+            <small class="text-muted">Total: <strong>@Model.Count()</strong></small>
+        </div>
+        <div class="col">
+            <small class="text-muted">Pending: <strong>@Model.Count(a => a.Status == "Applied")</strong></small>
+        </div>
+        <div class="col">
+            <small class="text-muted">Interviews: <strong>@Model.Count(a => a.Status.Contains("Interview"))</strong></small>
+        </div>
+        <div class="col">
+            <small class="text-muted">Offers: <strong>@Model.Count(a => a.Status == "Offer Received")</strong></small>
+        </div>
+    </div>
+}
+
+@* Helper function to pick the right Bootstrap badge color for each status *@
+@functions {
+    string GetStatusBadgeClass(string status) => status switch
+    {
+        "Applied"              => "bg-primary",
+        "Interview Scheduled"  => "bg-info text-dark",
+        "Interviewed"          => "bg-warning text-dark",
+        "Technical Test"       => "bg-warning text-dark",
+        "Offer Received"       => "bg-success",
+        "Rejected"             => "bg-danger",
+        "Withdrawn"            => "bg-secondary",
+        _                      => "bg-secondary"
+    };
+}

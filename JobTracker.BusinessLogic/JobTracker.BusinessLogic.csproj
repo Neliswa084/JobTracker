@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference to DataLogic for models -->
+    <ProjectReference Include="..\JobTracker.DataLogic\JobTracker.DataLogic.csproj" />
+    <!-- Reference to Repository so the service layer can call repository methods -->
+    <ProjectReference Include="..\JobTracker.Repository\JobTracker.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,77 @@
+@model JobTracker.ViewLogic.ViewModels.EditJobApplicationViewModel
+
+@{
+    ViewData["Title"] = "Edit Application";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="d-flex align-items-center mb-4">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm me-3">← Back</a>
+            <h2 class="mb-0">Edit Application</h2>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    @* Hidden field - sends the Id back to the controller so it knows which record to update *@
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="CompanyName" class="form-label fw-semibold"></label>
+                        <input asp-for="CompanyName" class="form-control" />
+                        <span asp-validation-for="CompanyName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="JobTitle" class="form-label fw-semibold"></label>
+                        <input asp-for="JobTitle" class="form-control" />
+                        <span asp-validation-for="JobTitle" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DateApplied" class="form-label fw-semibold"></label>
+                        <input asp-for="DateApplied" class="form-control" type="date" />
+                        <span asp-validation-for="DateApplied" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label fw-semibold"></label>
+                        <select asp-for="Status" class="form-select">
+                            @foreach (var option in Model.StatusOptions)
+                            {
+                                <option value="@option" selected="@(Model.Status == option ? "selected" : null)">
+                                    @option
+                                </option>
+                            }
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="JobLink" class="form-label fw-semibold"></label>
+                        <input asp-for="JobLink" class="form-control" />
+                        <span asp-validation-for="JobLink" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Notes" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Notes" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Notes" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

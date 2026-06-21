@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Entity Framework Core - needed here because the repository uses DbContext to query the database -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Reference to DataLogic so we can use the models and DbContext -->
+    <ProjectReference Include="..\JobTracker.DataLogic\JobTracker.DataLogic.csproj" />
+  </ItemGroup>
+
+</Project>

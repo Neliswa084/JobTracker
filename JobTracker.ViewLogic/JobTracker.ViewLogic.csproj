@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference to DataLogic for models used inside ViewModels -->
+    <ProjectReference Include="..\JobTracker.DataLogic\JobTracker.DataLogic.csproj" />
+  </ItemGroup>
+
+</Project>

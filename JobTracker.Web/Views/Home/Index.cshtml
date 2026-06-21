@@ -1,0 +1,57 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center py-5">
+    <h1 class="display-4 fw-bold">Never Lose Track of a Job Application Again</h1>
+    <p class="lead text-muted mt-3">
+        JobTracker helps you keep a clear record of every job you apply for —<br />
+        the company, the role, the date, the status, and your notes.
+    </p>
+    <p class="text-muted">
+        Ever received a call from a company 3 months after applying and couldn't remember which job it was?<br />
+        That's exactly the problem JobTracker solves.
+    </p>
+
+    <div class="mt-5">
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="JobApplication" asp-action="Index" class="btn btn-primary btn-lg px-5">
+                Go to My Applications →
+            </a>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg px-5 me-3">
+                Get Started — It's Free
+            </a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary btn-lg px-4">
+                Log In
+            </a>
+        }
+    </div>
+</div>
+
+<div class="row text-center mt-5 pt-4 border-top">
+    <div class="col-md-4 mb-4">
+        <div class="p-3">
+            <div class="display-5 mb-2">📝</div>
+            <h5>Track Every Application</h5>
+            <p class="text-muted small">Log the company, role, date applied, and a link to the job posting — all in one place.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="p-3">
+            <div class="display-5 mb-2">🔄</div>
+            <h5>Update Your Status</h5>
+            <p class="text-muted small">Move applications from "Applied" to "Interview Scheduled", "Offer Received", and more.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="p-3">
+            <div class="display-5 mb-2">🗒️</div>
+            <h5>Save Your Notes</h5>
+            <p class="text-muted small">Remember who interviewed you, what the company does, and anything else worth noting.</p>
+        </div>
+    </div>
+</div>

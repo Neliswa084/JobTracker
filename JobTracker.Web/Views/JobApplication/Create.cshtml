@@ -1,0 +1,76 @@
+@model JobTracker.ViewLogic.ViewModels.CreateJobApplicationViewModel
+
+@{
+    ViewData["Title"] = "Add New Application";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="d-flex align-items-center mb-4">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm me-3">← Back</a>
+            <h2 class="mb-0">Add New Job Application</h2>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="CompanyName" class="form-label fw-semibold"></label>
+                        <input asp-for="CompanyName" class="form-control" placeholder="e.g. Google, Nedbank, Discovery" />
+                        <span asp-validation-for="CompanyName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="JobTitle" class="form-label fw-semibold"></label>
+                        <input asp-for="JobTitle" class="form-control" placeholder="e.g. Junior Software Developer" />
+                        <span asp-validation-for="JobTitle" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DateApplied" class="form-label fw-semibold"></label>
+                        <input asp-for="DateApplied" class="form-control" type="date" />
+                        <span asp-validation-for="DateApplied" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label fw-semibold"></label>
+                        @* Dropdown list of status options defined in the ViewModel *@
+                        <select asp-for="Status" class="form-select">
+                            @foreach (var option in Model.StatusOptions)
+                            {
+                                <option value="@option">@option</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="JobLink" class="form-label fw-semibold"></label>
+                        <input asp-for="JobLink" class="form-control" placeholder="https://careers.company.com/job-posting" />
+                        <span asp-validation-for="JobLink" class="text-danger small"></span>
+                        <div class="form-text">Paste the link to the job posting so you can refer back to it later.</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Notes" class="form-label fw-semibold"></label>
+                        <textarea asp-for="Notes" class="form-control" rows="4"
+                                  placeholder="e.g. I applied through LinkedIn. The role requires 2 years experience. Contact was John Smith."></textarea>
+                        <span asp-validation-for="Notes" class="text-danger small"></span>
+                        <div class="form-text">Add any details you want to remember about this job or company.</div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Save Application</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

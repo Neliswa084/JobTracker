@@ -1,0 +1,74 @@
+@model JobTracker.ViewLogic.ViewModels.JobApplicationViewModel
+
+@{
+    ViewData["Title"] = "Application Details";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="d-flex align-items-center mb-4">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm me-3">← Back to List</a>
+            <h2 class="mb-0">Application Details</h2>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="mb-0">@Model.JobTitle</h4>
+                    <p class="mb-0 text-muted">@Model.CompanyName</p>
+                </div>
+                <span class="badge fs-6 @GetStatusBadgeClass(Model.Status)">@Model.Status</span>
+            </div>
+            <div class="card-body p-4">
+                <dl class="row">
+                    <dt class="col-sm-4">Date Applied</dt>
+                    <dd class="col-sm-8">@Model.DateApplied.ToString("dd MMMM yyyy") (@Model.DaysSinceApplied days ago)</dd>
+
+                    <dt class="col-sm-4">Job Link</dt>
+                    <dd class="col-sm-8">
+                        @if (!string.IsNullOrEmpty(Model.JobLink))
+                        {
+                            <a href="@Model.JobLink" target="_blank" rel="noopener">View Job Posting ↗</a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No link saved</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-4">Notes</dt>
+                    <dd class="col-sm-8">
+                        @if (!string.IsNullOrEmpty(Model.Notes))
+                        {
+                            @* white-space: pre-wrap preserves line breaks in the notes text *@
+                            <p style="white-space: pre-wrap;">@Model.Notes</p>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No notes</span>
+                        }
+                    </dd>
+                </dl>
+
+                <div class="d-flex gap-2 mt-3">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStatusBadgeClass(string status) => status switch
+    {
+        "Applied"              => "bg-primary",
+        "Interview Scheduled"  => "bg-info text-dark",
+        "Interviewed"          => "bg-warning text-dark",
+        "Technical Test"       => "bg-warning text-dark",
+        "Offer Received"       => "bg-success",
+        "Rejected"             => "bg-danger",
+        "Withdrawn"            => "bg-secondary",
+        _                      => "bg-secondary"
+    };
+}
