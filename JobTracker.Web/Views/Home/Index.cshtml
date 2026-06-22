@@ -2,56 +2,115 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="text-center py-5">
-    <h1 class="display-4 fw-bold">Never Lose Track of a Job Application Again</h1>
-    <p class="lead text-muted mt-3">
-        JobTracker helps you keep a clear record of every job you apply for —<br />
-        the company, the role, the date, the status, and your notes.
-    </p>
-    <p class="text-muted">
-        Ever received a call from a company 3 months after applying and couldn't remember which job it was?<br />
-        That's exactly the problem JobTracker solves.
-    </p>
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <p class="built-by">Built by Neliswa Ngcobo</p>
+                <h1 class="hero-title">JobTracker</h1>
+                <p class="hero-subtitle">
+                    A tool I built for myself after losing track of every job I applied to.
+                </p>
 
-    <div class="mt-5">
-        @if (User.Identity != null && User.Identity.IsAuthenticated)
-        {
-            <a asp-controller="JobApplication" asp-action="Index" class="btn btn-primary btn-lg px-5">
-                Go to My Applications →
-            </a>
-        }
-        else
-        {
-            <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg px-5 me-3">
-                Get Started — It's Free
-            </a>
-            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary btn-lg px-4">
-                Log In
-            </a>
-        }
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="JobApplication" asp-action="Index" class="btn btn-primary btn-lg hero-btn">
+                        Go to My Applications
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg hero-btn me-2">
+                        Get Started
+                    </a>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary btn-lg hero-btn">
+                        Log In
+                    </a>
+                }
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row text-center mt-5 pt-4 border-top">
-    <div class="col-md-4 mb-4">
-        <div class="p-3">
-            <div class="display-5 mb-2">📝</div>
-            <h5>Track Every Application</h5>
-            <p class="text-muted small">Log the company, role, date applied, and a link to the job posting — all in one place.</p>
+<div class="story-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="section-title">Why I built this</h2>
+                <p class="story-text">
+                    When I was job hunting, I was applying to multiple companies every single day.
+                    After a few weeks I had no idea where I stood with any of them.
+                    Then one afternoon I got a phone call from a recruiter asking me about
+                    my application  and I had absolutely no idea which company it was or when I had applied.
+                </p>
+                <p class="story-text">
+                    I needed something simple where I could log each application, write down notes,
+                    and update the status as things moved along. So I built JobTracker.
+                </p>
+            </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
-        <div class="p-3">
-            <div class="display-5 mb-2">🔄</div>
-            <h5>Update Your Status</h5>
-            <p class="text-muted small">Move applications from "Applied" to "Interview Scheduled", "Offer Received", and more.</p>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">What it does</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <h5 class="feature-title">Log your applications</h5>
+                    <p class="feature-text">
+                        Save the company name, job title, date you applied, and a link to the job posting.
+                        All in one place, organised by date.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <h5 class="feature-title">Track the status</h5>
+                    <p class="feature-text">
+                        Update each application as it moves from Applied, to Interview Scheduled,
+                        to Offer Received  or unfortunately, Rejected.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <h5 class="feature-title">Keep your notes</h5>
+                    <p class="feature-text">
+                        Write down anything worth remembering  the interviewer's name,
+                        what the role involves, or questions they asked you.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
-        <div class="p-3">
-            <div class="display-5 mb-2">🗒️</div>
-            <h5>Save Your Notes</h5>
-            <p class="text-muted small">Remember who interviewed you, what the company does, and anything else worth noting.</p>
+</div>
+
+<div class="tech-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="section-title">About the project</h2>
+                <p class="story-text">
+                    This is a full stack web application I built using ASP.NET Core MVC and SQL Server.
+                    It follows a layered architecture with separate projects for data access,
+                    business logic, and the web layer. User accounts and authentication are handled
+                    using ASP.NET Core Identity.
+                </p>
+                <div class="tech-tags">
+                    <span class="tech-tag">ASP.NET Core MVC</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">Entity Framework Core</span>
+                    <span class="tech-tag">SQL Server</span>
+                    <span class="tech-tag">ASP.NET Core Identity</span>
+                    <span class="tech-tag">Bootstrap</span>
+                    <span class="tech-tag">Layered Architecture</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
